@@ -104,7 +104,7 @@
         style="background-image: url('./assets/images/contact-bg.png')">
         <div class="container">
 
-          <form action="" class="contact-form">
+          <form id="contactForm" action="" class="contact-form">
 
             <h2 class="headline-sm" id="contact-label">Get in touch</h2>
 
@@ -134,7 +134,7 @@
             <label for="message" class="label">Your message </label>
             <textarea name="message" id="message" placeholder="Your message *" required class="input-field"></textarea>
 
-            <a href="#" class="btn btn-tertiary">Send Message</a>
+            <button type="submit" class="btn btn-tertiary">Send Message</button>
 
           </form>
 
@@ -221,8 +221,32 @@
 
 
 
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("xYkXwgxXhRCrfTq6j");
+  </script>
+  
 
-
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+  
+      // Get form data
+      var formData = new FormData(event.target);
+  
+      // Send email using email.js
+      emailjs.sendForm("service_fjhe48h", "template_v1b0w37", formData)
+        .then(function (response) {
+          console.log("Email sent successfully", response);
+          // Add any success handling code here
+        }, function (error) {
+          console.log("Email sending failed", error);
+          // Add any error handling code here
+        });
+    });
+  </script>
+  
+  
   <!-- 
     - custom js link
   -->
